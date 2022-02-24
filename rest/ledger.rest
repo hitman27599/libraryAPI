@@ -1,0 +1,13 @@
+GET http://localhost:8000/api/ledger
+
+###
+DELETE  http://localhost:8000/api/ledger
+
+###
+GET http://localhost:8000/api/ledger/lendinghistory
+content-type:application/json
+
+{
+    "bookname":"atomic habits",
+    "library":"library1"
+}

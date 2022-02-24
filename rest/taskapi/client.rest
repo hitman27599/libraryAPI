@@ -1,0 +1,35 @@
+### register user
+POST http://localhost:8000/register
+content-type:application/json
+
+{
+    "name":"rohit3",
+    "email":"rohit.sandirane@gmail.com",
+    "password":"passowrd",
+    "library":"library2"
+}
+
+### GET ALL available books from a single library
+GET http://localhost:8000/api/books/clientget?username=rohit1&library=library1
+content-type:application/json
+
+
+### RESERVE BOOK
+PUT http://localhost:8000/api/books/reserve
+content-type:application/json
+
+{
+    "library":"library2",
+    "bookname":"two states",
+    "username":"rohit3"
+}
+
+### RETURN BOOK
+PUT http://localhost:8000/api/books/return
+content-type:application/json
+
+{
+    "library":"library2",
+    "bookname":"two states",
+    "username":"rohit3"
+}

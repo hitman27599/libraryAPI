@@ -1,0 +1,7 @@
+### add book details
+POST http://localhost:8000/api/bookdetails/add
+content-type:application/json
+
+{
+    "name":"half girlfriend"
+}

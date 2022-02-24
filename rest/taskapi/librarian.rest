@@ -1,0 +1,48 @@
+### add book details
+POST  http://localhost:8000/api/bookdetails/add
+content-type:application/json
+
+{
+    "name":"atomic habits"
+}
+
+###add a new book
+POST http://localhost:8000/api/books/add
+content-type:application/json
+
+{
+    "bookName":"two states",
+    "library":"library1",
+    "librarian":"rohit33"
+}
+
+### GET ALL available books from a single library
+GET http://localhost:8000/api/books/librarianget?manager=rohit22&library=library1
+content-type:application/json
+
+
+###get all users from a ibrary
+GET http://localhost:8000/api/users?library=library1
+content-type: application/json
+
+
+### get the hiostory of users
+GET http://localhost:8000/api/books/history?library=library1&bookname=harry+potter
+content-type:application/json
+
+
+### LEND BOOK
+PUT http://localhost:8000/api/books/lend
+content-type:application/json
+
+{
+    "library":"library2",
+    "bookname":"two states",
+    "username":"rohit3"
+
+    
+}
+
+### UPATUE STATUS of  Books
+PUT http://localhost:8000/api/books/updatestatus?library=library1
+content-type:application/json

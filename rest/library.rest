@@ -1,0 +1,61 @@
+###add library and assign librarian
+POST http://localhost:8000/api/libraries/add
+content-type:application/json
+
+{
+    "library" : "library1",
+    "name":"rohit11",
+    "email":"rohit.sandirane@gmail.com",
+    "password":"passowrd"
+}
+
+### get all values of libraries
+GET http://localhost:8000/api/libraries
+
+### add books 
+POST http://localhost:8000/api/libraries/books
+content-type:application/json
+
+{
+    "library" : "library1",
+    "bookname":"harry potter"
+}
+
+### add users
+POST http://localhost:8000/api/libraries/users
+content-type:application/json
+
+{
+    "library" : "library1",
+    "username" : "rohit"
+}
+
+### delete all libraries
+DELETE http://localhost:8000/api/libraries
+
+### update manager
+PUT http://localhost:8000/api/libraries/updatemanager
+content-type:application/json
+
+{
+    "library" : "library3",
+    "name":"rohit12",
+    "email":"rohit.sandirane@gmail.com",
+    "password":"passowrd"
+}
+
+###
+POST http://localhost:8000/api/libraries/books
+content-type:application/json
+
+{
+    "name":"library1"
+}
+
+### get users from libraries
+GET http://localhost:8000/api/libraries/users
+content-type:application/json
+
+{
+    "library":"library1"
+}

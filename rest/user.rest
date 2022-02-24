@@ -1,0 +1,51 @@
+### register user CLIENT
+POST http://localhost:8000/register
+content-type:application/json
+
+{
+    "name":"rohit2",
+    "email":"rohit.sandirane@gmail.com",
+    "password":"passowrd",
+    "library":"library1"
+}
+
+### login user
+POST http://localhost:8000/login
+content-type:application/json
+
+{
+    "name":"rohit5",
+    "password":"passowrd"
+}
+
+###
+GET http://localhost:8000/home1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjE1ZDA2MWI5YTAyNThhNTcyZTA3YmUiLCJuYW1lIjoicm9oaXQxIiwiZW1haWwiOiJyb2hpdC5zYW5kaXJhbmVAZ21haWwuY29tIiwicGFzc3dvcmQiOiJwYXNzb3dyZCIsImxlZGdlciI6W10sInJvbGUiOiJjbGllbnQiLCJfX3YiOjAsImlhdCI6MTY0NTU5OTYyOH0.ju-RmBcuvrcVstyleCF_XgGoV3HnnYf0J0aFDqvz0DI
+
+### add ADMIN user (FOR CLIENT USE LIBRARY parameter too)
+POST http://localhost:8000/api/users/register/admin
+content-type:application/json
+
+{
+    "name":"rohit1",
+    "email":"rohit.sandirane@gmail.com",
+    "password":"passowrd"
+}
+
+###get all users
+GET http://localhost:8000/api/users
+
+### get single user
+GET http://localhost:8000/api/users/user/?name=rohit
+
+### get all clients
+GET http://localhost:8000/api/users/clients
+
+### delete all users
+DELETE http://localhost:8000/api/users
+
+### delete single user
+DELETE http://localhost:8000/api/users/user?id=6216b1811bb36a8fbb05f624
+
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjE1ZDA2MWI5YTAyNThhNTcyZTA3YmUiLCJuYW1lIjoicm9oaXQxIiwiZW1haWwiOiJyb2hpdC5zYW5kaXJhbmVAZ21haWwuY29tIiwicGFzc3dvcmQiOiJwYXNzb3dyZCIsImxlZGdlciI6W10sInJvbGUiOiJjbGllbnQiLCJfX3YiOjAsImlhdCI6MTY0NTU5OTYyOH0.ju-RmBcuvrcVstyleCF_XgGoV3HnnYf0J0aFDqvz0DI

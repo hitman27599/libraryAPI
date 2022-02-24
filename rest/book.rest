@@ -1,0 +1,63 @@
+###add a new book
+POST http://localhost:8000/api/books/add
+content-type:application/json
+
+{
+    "bookName":"jungle book",
+    "library":"library1",
+    "status":"available"
+}
+
+
+### get all books
+GET http://localhost:8000/api/books
+
+
+### delete all books
+DELETE http://localhost:8000/api/books
+
+### GET ALL available books from a single library
+GET http://localhost:8000/api/books/library/available/library1
+
+### GET all available books from a library except LENT
+GET http://localhost:8000/api/books/library/available/library
+
+
+### RESERVE BOOK
+PUT http://localhost:8000/api/books/reserve
+content-type:application/json
+
+{
+    "library":"library1",
+    "bookname":"atomic habits",
+    "username":"rohit1"
+}
+
+### LEND BOOK
+PUT http://localhost:8000/api/books/lend
+content-type:application/json
+
+{
+    "library":"library1",
+    "bookname":"atomic habits",
+    "username":"rohit1"
+}
+
+### RETURN BOOK
+PUT http://localhost:8000/api/books/return
+content-type:application/json
+
+{
+    "library":"library1",
+    "bookname":"atomic habits",
+    "username":"rohit1"
+}
+
+### UPATUE STATUS of  Books
+PUT http://localhost:8000/api/books/updatestatus?library=library1
+content-type:application/json
+
+
+### get the hiostory of users
+GET http://localhost:8000/api/books/history?library=library1&bookname=harry+potter
+content-type:application/json

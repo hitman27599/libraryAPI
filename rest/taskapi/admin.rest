@@ -1,0 +1,31 @@
+###add library and assign librarian
+POST http://localhost:8000/api/libraries/add
+content-type:application/json
+
+{
+    "library" : "library2",
+    "name":"rohit33",
+    "email":"rohit.sandirane@gmail.com",
+    "password":"passowrd"
+}
+
+### GET ALL available books from alllibrary
+GET http://localhost:8000/api/books/adminget
+
+
+### update manager[LIBRARIAN]
+PUT http://localhost:8000/api/libraries/updatemanager
+content-type:application/json
+
+{
+    "library" : "library1",
+    "name":"rohit22",
+    "email":"rohit.sandirane@gmail.com",
+    "password":"passowrd"
+}
+
+
+### get the history of users along with duration of time
+## that the book was lent to
+GET http://localhost:8000/api/books/history?library=library1&bookname=harry+potter
+content-type:application/json
