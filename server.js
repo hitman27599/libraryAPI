@@ -7,7 +7,21 @@ const db = require('./db/db');
 const {authenticate,authAdmin,authLibrarian} = require('./auth');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const cookie = require('cookie-session');
+const formidable = require('formidable');
+const crypto = require('crypto');
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const multer = require("multer");
+const path = require('path');
+const {v4 : uuidv4} = require('uuid');
+const zlib = require('zlib');
+const fs = require('fs');
+const { Readable } = require('stream');
+const AdmZip = require("adm-zip");
+const streamifier = require('streamifier');
+const { createEncryptStream, createDecryptStream, setPassword } = require('aes-encrypt-stream');
+var archiver = require('archiver');
+// const cookie = require('cookie-session');
 const userRoutes = require('./routes/api/userRoutes');
 const bookDetailRoutes = require('./routes/api/bookDetailsRoutes');
 const bookRoutes = require('./routes/api/bookRoutes');
@@ -19,11 +33,12 @@ const cookieSession = require('cookie-session');
 const { User,Library,ROLES } = require('./models/user');
 
 
+const algorithm = "aes-256-cbc";
+const initVector = crypto.randomBytes(16);
+const Securitykey = crypto.randomBytes(32);
 const PORT = process.env.PORT || 8000;
 app.use(cors({ origin: true, credentials: true }));
-app.use(cookieSession({
-    secret:process.env.COOKIE_SECRET,
-}));
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use('/api/users',userRoutes);
@@ -100,11 +115,65 @@ app.post('/login',(req,res)=>{
 
 });
 
-app.get('/home',authenticate,(req,res)=>{
-    res.send("home");
+
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET_KEY
 });
-app.get('/home1',authenticate,authAdmin,(req,res)=>{
-    res.send("home1");
+
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+      folder: "DEV",
+      public_id:(req,file)=>{
+          return uuidv4();
+      }
+    },
+});
+
+const upload = multer({ storage: storage });
+const upload1 = multer.memoryStorage();
+
+app.post('/home',upload.array('file'),(req,res)=>{
+    console.log(req.files);
+    // cloudinary.v2.uploader.upload(req.files.file,(err,result)=>{
+    //     console.log(result);
+    // });
+    // res.send(req.files);
+});
+app.post('/home1',async(req,res)=>{
+    cloudinary.uploader.destroy("DEV");
+    res.json("success");
+});
+
+
+
+app.post('/compress',multer().single('file'),async(req,res)=>{
+    // res.send(req.files);
+    console.log(req.file);
+    var zip = zlib.createGzip();
+    var write = fs.createWriteStream('uploads/new.pdf.gz');
+    // const read = Readable.from(req.file.buffer.toString());
+    // streamifier.createReadStream(req.file.buffer).pipe(zip).pipe(write);
+    // read.pipe(zip).pipe(write);
+
+    archiver.registerFormat('zip-encryptable', require('archiver-zip-encryptable'));
+    var archive = archiver('zip-encryptable', {
+        zlib: { level: 9 },
+        forceLocalTime: true,
+        password: 'test'
+    });
+
+    var read = streamifier.createReadStream(req.file.buffer).pipe(zip);
+    archive.pipe(write);
+
+    archive.append(read,{name:"atomicHabits.pdf"});
+
+    archive.finalize();
+
+    res.send("success");
 });
 
 app.get('/logout',(req,res)=>{

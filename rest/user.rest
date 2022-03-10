@@ -19,8 +19,8 @@ content-type:application/json
 }
 
 ###
-GET http://localhost:8000/home1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjE1ZDA2MWI5YTAyNThhNTcyZTA3YmUiLCJuYW1lIjoicm9oaXQxIiwiZW1haWwiOiJyb2hpdC5zYW5kaXJhbmVAZ21haWwuY29tIiwicGFzc3dvcmQiOiJwYXNzb3dyZCIsImxlZGdlciI6W10sInJvbGUiOiJjbGllbnQiLCJfX3YiOjAsImlhdCI6MTY0NTU5OTYyOH0.ju-RmBcuvrcVstyleCF_XgGoV3HnnYf0J0aFDqvz0DI
+POST http://localhost:8000/home1
+
 
 ### add ADMIN user (FOR CLIENT USE LIBRARY parameter too)
 POST http://localhost:8000/api/users/register/admin
